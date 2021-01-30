@@ -3,17 +3,13 @@ import ModalBox from "./Modal";
 import ToDoItem from './TodoItem';
 import Button from 'react-bootstrap/Button';
 
-
-
 export default function FilmList(props) {
     const {
-        // submit,
         changeTitle,
         changeAutor,
         onclick,
         changeCat,
         changePri,
-        data,
         sumData,
         a,
         clearAll,
@@ -22,7 +18,6 @@ export default function FilmList(props) {
         handleShow,
         removeItem
     } = props;
-
     const count = sumData.length
     return (
         <>
@@ -40,25 +35,6 @@ export default function FilmList(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>
-                            <td>{data.title}</td>
-                            <td>{data.name}</td>
-                            <td>{data.category}</td>
-                            <td>{data.priority}</td>
-                        </tr> */}
-                        {/* {sumData.map((d, index) => {
-                            return (
-                                <>
-                                    <ToDoItem
-                                        key={index}
-                                        id={index}
-                                        d={d}
-                                        onCheck={removeItem}
-                                    />
-                                </>
-                            )
-                        })} */}
-
                         {sumData.map((d, index) => (
                             <ToDoItem
                                 key={index}
@@ -69,13 +45,6 @@ export default function FilmList(props) {
                         ))}
                     </tbody>
                 </Table>
-                {/* <ul>
-                    {sumData.map((d) => {
-                        return <li>{d.title}</li>
-                    })}
-                </ul> */}
-
-
             </div>
         </>
     )

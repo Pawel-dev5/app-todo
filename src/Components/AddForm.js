@@ -1,23 +1,12 @@
 import Form from 'react-bootstrap/Form'
-import { useState } from "react";
-import Button from 'react-bootstrap/Button';
-
-
 export default function AddForm(props) {
     const {
         submit,
         changeTitle,
         changeAutor,
         changeCat,
-        changePri,
-        handleClose,
-        ToDoAction,
-        a
+        changePri
     } = props;
-
-    // function a() {
-    //     console.log("hello2")
-    // }
     return (
         <>
             <Form submit={submit}>
@@ -50,12 +39,6 @@ export default function AddForm(props) {
                         <option>5</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="secondary" onClick={handleClose}>
-                    Zamknij
-                </Button>
-                    <Button variant="primary" type="button" onClick={a} >
-                    Dodaj
-                </Button>
             </Form>
         </>
     )
