@@ -20,11 +20,17 @@ function App() {
   }
   function removeItem(id) {
     setSumData(prevData => {
-        return prevData.filter((sumData, index) => {
-            return index !== id;
-        })
+      return prevData.filter((sumData, index) => {
+        return index !== id;
+      })
     });
-}
+  }
+
+  function clearAll() {
+    return setSumData([])
+  }
+  // const clearAll = () => sumData([]);
+
 
   // const submit = e => {
   //   setSumData(prevData => {
@@ -78,6 +84,7 @@ function App() {
         handleShow={handleShow}
         show={show}
         removeItem={removeItem}
+        clearAll={clearAll}
       />
     </div>
   );
