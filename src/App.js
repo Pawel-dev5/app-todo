@@ -14,6 +14,7 @@ function App() {
   function a() {
     let tab = [...sumData, data];
     console.log(tab)
+    // setShow(defaultShow);
     return setSumData(tab);
   }
   function removeItem(id) {

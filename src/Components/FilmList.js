@@ -25,7 +25,7 @@ export default function FilmList(props) {
     } else return (
         <>
             <ModalBox show={show} handleShow={handleShow} handleClose={handleClose} a={a} clearAll={clearAll} sumData={sumData} changeTitle={changeTitle} changeAutor={changeAutor} onclick={onclick} changeCat={changeCat} changePri={changePri} />
-            <h1>Brak filmów do obejrzenia, dodaj film do listy</h1>
+            <h4>Brak filmów do obejrzenia, dodaj film do listy</h4>
         </>
     )
     return (
