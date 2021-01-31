@@ -18,7 +18,7 @@ function App() {
   }
   function removeItem(id) {
     setSumData(prevData => {
-      return prevData.filter((sumData, index) => {
+      return prevData.filter((d, index) => {
         return index !== id;
       })
     });
