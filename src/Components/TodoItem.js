@@ -1,5 +1,6 @@
 import React from "react";
-import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default function ToDoItem(props) {
     const {
@@ -14,7 +15,9 @@ export default function ToDoItem(props) {
                 <td>{d.name}</td>
                 <td>{d.category}</td>
                 <td>{d.priority}</td>
-                <td><Button onClick={() => {onCheck(id)}} variant="primary" className="btn-del">Usuń</Button></td>
+                <td>
+                    <FontAwesomeIcon className="icon-delete" onClick={() => { onCheck(id) }} icon={faTrash} />
+                </td>
             </tr>
         </>
     )

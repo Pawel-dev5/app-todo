@@ -1,7 +1,6 @@
 import Form from 'react-bootstrap/Form'
 export default function AddForm(props) {
     const {
-        submit,
         changeTitle,
         changeAutor,
         changeCat,
@@ -9,7 +8,7 @@ export default function AddForm(props) {
     } = props;
     return (
         <>
-            <Form submit={submit}>
+            <Form>
                 <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Control type="text" placeholder="Tytuł" onChange={changeTitle} />
                 </Form.Group>
