@@ -1,11 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import { useState } from "react";
 import AddForm from "./AddForm";
 
-function ModalBox(props) {
+export default function ModalBox(props) {
     const {
-        // submit,
         changeTitle,
         changeAutor,
         changeCat,
@@ -18,12 +16,6 @@ function ModalBox(props) {
         handleClose,
         handleShow
     } = props;
-    // const defaultShow = false
-    // const [show, setShow] = useState(defaultShow);
-
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
-
     return (
         <>
             <Button variant="primary" className="btn-add" onClick={handleShow} >
@@ -37,16 +29,14 @@ function ModalBox(props) {
                     <AddForm a={a} data={data} sumData={sumData} handleClose={handleClose} ToDoAction={ToDoAction} changeTitle={changeTitle} changeAutor={changeAutor} changeCat={changeCat} changePri={changePri} />
                 </Modal.Body>
                 <Modal.Footer>
-                    {/* <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleClose}>
                         Zamknij
-            </Button>
-                    <Button variant="primary" type="submit" onClick={ToDoAction} >
+                    </Button>
+                    <Button variant="primary" onClick={a} >
                         Dodaj
-            </Button> */}
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
 }
-
-export default ModalBox;

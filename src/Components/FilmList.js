@@ -1,31 +1,41 @@
 import Table from 'react-bootstrap/Table';
 import ModalBox from "./Modal";
 import ToDoItem from './TodoItem';
-
+import Button from 'react-bootstrap/Button';
 
 export default function FilmList(props) {
     const {
-        // submit,
         changeTitle,
         changeAutor,
         onclick,
         changeCat,
         changePri,
-        data,
         sumData,
         a,
+        clearAll,
         show,
         handleClose,
         handleShow,
         removeItem
     } = props;
-
     const count = sumData.length
+
+    if (sumData.length !== 0) {
+
+    } else return (
+        <>
+            <ModalBox show={show} handleShow={handleShow} handleClose={handleClose} a={a} clearAll={clearAll} sumData={sumData} changeTitle={changeTitle} changeAutor={changeAutor} onclick={onclick} changeCat={changeCat} changePri={changePri} />
+            <h4>Brak filmów do obejrzenia, dodaj film do listy</h4>
+        </>
+    )
     return (
         <>
-            <ModalBox show={show} handleShow={handleShow} handleClose={handleClose} a={a} sumData={sumData} changeTitle={changeTitle} changeAutor={changeAutor} onclick={onclick} changeCat={changeCat} changePri={changePri} />
+            <ModalBox show={show} handleShow={handleShow} handleClose={handleClose} a={a} clearAll={clearAll} sumData={sumData} changeTitle={changeTitle} changeAutor={changeAutor} onclick={onclick} changeCat={changeCat} changePri={changePri} />
             <div className="container-list">
-                <h4>Zadania: {count}</h4>
+                <div className="header-container">
+                    <h6>Filmy do obejrzenia: {count}</h6>
+                    <Button onClick={clearAll} variant="primary" className="btn-rmv">Wyczyść</Button>
+                </div>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -33,28 +43,10 @@ export default function FilmList(props) {
                             <th>Autor</th>
                             <th>Kategoria</th>
                             <th>Priorytet</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>
-                            <td>{data.title}</td>
-                            <td>{data.name}</td>
-                            <td>{data.category}</td>
-                            <td>{data.priority}</td>
-                        </tr> */}
-                        {/* {sumData.map((d, index) => {
-                            return (
-                                <>
-                                    <ToDoItem
-                                        key={index}
-                                        id={index}
-                                        d={d}
-                                        onCheck={removeItem}
-                                    />
-                                </>
-                            )
-                        })} */}
-
                         {sumData.map((d, index) => (
                             <ToDoItem
                                 key={index}
@@ -65,13 +57,6 @@ export default function FilmList(props) {
                         ))}
                     </tbody>
                 </Table>
-                {/* <ul>
-                    {sumData.map((d) => {
-                        return <li>{d.title}</li>
-                    })}
-                </ul> */}
-
-
             </div>
         </>
     )

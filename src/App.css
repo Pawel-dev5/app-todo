@@ -44,3 +44,11 @@
 .btn-add{
   margin-top: 100px;
 }
+.btn-rmv, h6{
+  margin: 20px;
+}
+.header-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

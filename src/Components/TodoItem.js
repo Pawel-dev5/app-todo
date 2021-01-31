@@ -1,18 +1,21 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
 
-const ToDoItem = (d, onCheck, id) => {
+export default function ToDoItem(props) {
+    const {
+        d,
+        id,
+        onCheck,
+    } = props;
     return (
         <>
-            <tr
-                onClick={() => { onCheck(id) }}
-            >
-                <td>{d.d.title}</td>
-                <td>{d.d.name}</td>
-                <td>{d.d.category}</td>
-                <td>{d.d.priority}</td>
+            <tr>
+                <td>{d.title}</td>
+                <td>{d.name}</td>
+                <td>{d.category}</td>
+                <td>{d.priority}</td>
+                <td><Button onClick={() => {onCheck(id)}} variant="primary" className="btn-del">Usuń</Button></td>
             </tr>
         </>
     )
 };
-
-export default ToDoItem;
