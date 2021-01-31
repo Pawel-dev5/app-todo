@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import AddForm from "./AddForm";
 
-function ModalBox(props) {
+export default function ModalBox(props) {
     const {
         changeTitle,
         changeAutor,
@@ -40,4 +40,3 @@ function ModalBox(props) {
         </>
     );
 }
-export default ModalBox;
