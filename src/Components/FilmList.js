@@ -16,14 +16,16 @@ export default function FilmList(props) {
         show,
         handleClose,
         handleShow,
-        removeItem
+        removeItem,
+        addDone,
+        done
     } = props;
 
     const all = "Kryminał";
     const [filters, setFilters] = useState(all);
 
     const filterCategory = () => { setFilters("Dramat") }
-    console.log(filters)
+    // console.log(filters)
 
     const count = sumData.length
 
@@ -84,13 +86,15 @@ export default function FilmList(props) {
 
                         {/* To działa */}
                         {sumData.map((d, index) => {
-                            console.log(d.category)
+                            // console.log(d.category)
                             return (
                                 <ToDoItem
                                     key={index}
                                     id={index}
                                     d={d}
                                     onCheck={removeItem}
+                                    addDone={addDone}
+                                    done={done}
                                 />
                             )
                         })}

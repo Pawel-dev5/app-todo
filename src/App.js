@@ -1,12 +1,19 @@
 import './App.css';
 import FilmList from "./Components/FilmList";
 import { useState } from "react";
+const arr = {
+  title: "film1",
+  name: "artysta 1",
+  category: "Poezja",
+  priority: "1"
+}
 
 function App() {
   const defaultShow = false
   const [show, setShow] = useState(defaultShow);
   const [sumData, setSumData] = useState([]);
   const [data, setData] = useState([]);
+  const [done, setDone] = useState("no-active");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,11 +22,34 @@ function App() {
     let tab = [...sumData, data];
     console.log(tab)
     setShow(defaultShow);
-    return setSumData(tab);
+    setSumData(tab); 
+    setData([]);
+    console.log(data)
+    return
   }
+
+  function addDone(id) {
+    // let tab1 = [...done, data];
+    // console.log(tab1)
+    // setShow(defaultShow);
+    // setSumData(tab1); 
+    // setData([]);
+
+    // setSumData(prevData => {
+    //   return prevData.filter((data, index) => {
+    //     return index !== id;
+    //   })
+    // });
+    if (done === "no-active") {
+      setDone("active")
+    }else return setDone("no-active")
+  }
+  // console.log(done)
+
   function removeItem(id) {
+    console.log(data)
     setSumData(prevData => {
-      return prevData.filter((d, index) => {
+      return prevData.filter((data, index) => {
         return index !== id;
       })
     });
@@ -71,6 +101,8 @@ function App() {
         show={show}
         removeItem={removeItem}
         clearAll={clearAll}
+        addDone={addDone}
+        done={done}
       />
     </div>
   );
