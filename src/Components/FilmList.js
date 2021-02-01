@@ -149,7 +149,6 @@ export default function FilmList(props) {
                                     onCheck={removeItem}
                                     addDone={addDone}
                                     done={done}
-                                    sumData={sumData}
                                     sumDone={sumDone}
                                     onCheck={removeDoneItem}
                                 />

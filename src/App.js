@@ -1,13 +1,13 @@
 import './App.css';
 import FilmList from "./Components/FilmList";
 import { useState } from "react";
-const arr = {
-  title: "film1",
-  name: "artysta 1",
-  category: "Poezja",
-  priority: "1"
-}
 
+// const arr = {
+//   title: "film1",
+//   name: "artysta 1",
+//   category: "Poezja",
+//   priority: "1"
+// }
 function App() {
   const defaultShow = false
   const [show, setShow] = useState(defaultShow);
@@ -22,8 +22,8 @@ function App() {
   const clearAll = () => setSumData([]);
 
   function a() {
-    let tab = [...sumData, data];
-    // console.log(tab)
+    let tab = sumData.concat(data);
+    console.log(tab)
     setShow(defaultShow);
     setSumData(tab);
     // setData([]);
@@ -32,44 +32,32 @@ function App() {
   }
 
   function addDone(id) {
-    // const {
-    //   id,
-    //   sumData
-    // } = props;
-    // let tab1 = [...done, data];
-    // console.log(tab1)
-    // setShow(defaultShow);
-    // setSumData(tab1); 
-    // setData([]);
 
-    // console.log(sumData)
+    // let doneTab2 = [...sumDone, done]
+    // setSumDone(done)
 
-    // console.log("done buton")
-
-    // let tabDone = [...sumDone, done]
-    // console.log(tabDone)
-
-    // setDone(tabDone);
-    let doneTab = sumDone.concat(done)
-    setSumDone(doneTab)
-    console.log(doneTab)
-
-    setDone(sumData)
     setDone(prevData => {
       return sumData.filter((data, index) => {
         return index === id;
       })
     });
+    function addDoneSum() {
+      const doneTab = sumDone.concat(done)
+      setSumDone(doneTab)
+      console.log(doneTab)
 
-    console.log(sumDone)
-    console.log(done)
 
-    // let doneTab = [...sumDone, done]
-    // let tabDone = {...sumDone, done}
-    // console.log(tabDone)
-    // const toObject = (sumData, key) => sumData.reduce((a, b) => ({ ...a, [b[key]]: b }), {});
-    // console.log(toObject)
+      return
+    }
+    addDoneSum();
+    // const doneTab = sumDone.concat(done)
+    // setSumDone(doneTab)
 
+    // console.log(doneTab)
+
+    // setSumDone(done)
+    // console.log(sumDone)
+    // console.log(done)
 
     setSumData(prevData => {
       return prevData.filter((data, index) => {
@@ -85,8 +73,6 @@ function App() {
   // console.log(sumData)
 
   function removeDoneItem(id) {
-    console.log(sumData)
-    console.log(id)
     setSumDone(prevData => {
       return prevData.filter((data, index) => {
         console.log(index)
@@ -97,8 +83,6 @@ function App() {
   }
 
   function removeItem(id) {
-    console.log(sumData)
-    console.log(id)
     setSumData(prevData => {
       return prevData.filter((data, index) => {
         console.log(index)

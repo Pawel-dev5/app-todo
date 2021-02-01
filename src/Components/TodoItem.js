@@ -14,7 +14,7 @@ export default function ToDoItem(props) {
     // console.log(sumData)
     return (
         <>
-            <tr className={done}>
+            <tr>
                 <td>{d.title}</td>
                 <td>{d.name}</td>
                 <td>{d.category}</td>
