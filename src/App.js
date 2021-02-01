@@ -13,51 +13,101 @@ function App() {
   const [show, setShow] = useState(defaultShow);
   const [sumData, setSumData] = useState([]);
   const [data, setData] = useState([]);
-  const [done, setDone] = useState("no-active");
+  const [done, setDone] = useState([]);
+  const [sumDone, setSumDone] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const clearAllDone = () => setSumDone([]);
+  const clearAll = () => setSumData([]);
 
   function a() {
     let tab = [...sumData, data];
-    console.log(tab)
+    // console.log(tab)
     setShow(defaultShow);
-    setSumData(tab); 
-    setData([]);
-    console.log(data)
+    setSumData(tab);
+    // setData([]);
+    // console.log(data)
     return
   }
 
   function addDone(id) {
+    // const {
+    //   id,
+    //   sumData
+    // } = props;
     // let tab1 = [...done, data];
     // console.log(tab1)
     // setShow(defaultShow);
     // setSumData(tab1); 
     // setData([]);
 
-    // setSumData(prevData => {
-    //   return prevData.filter((data, index) => {
-    //     return index !== id;
-    //   })
-    // });
-    if (done === "no-active") {
-      setDone("active")
-    }else return setDone("no-active")
-  }
-  // console.log(done)
+    // console.log(sumData)
 
-  function removeItem(id) {
-    console.log(data)
+    // console.log("done buton")
+
+    // let tabDone = [...sumDone, done]
+    // console.log(tabDone)
+
+    // setDone(tabDone);
+    let doneTab = sumDone.concat(done)
+    setSumDone(doneTab)
+    console.log(doneTab)
+
+    setDone(sumData)
+    setDone(prevData => {
+      return sumData.filter((data, index) => {
+        return index === id;
+      })
+    });
+
+    console.log(sumDone)
+    console.log(done)
+
+    // let doneTab = [...sumDone, done]
+    // let tabDone = {...sumDone, done}
+    // console.log(tabDone)
+    // const toObject = (sumData, key) => sumData.reduce((a, b) => ({ ...a, [b[key]]: b }), {});
+    // console.log(toObject)
+
+
     setSumData(prevData => {
       return prevData.filter((data, index) => {
         return index !== id;
       })
     });
+    // const a = sumData;
+    // if (done === "no-active") {
+    //   setDone("active")
+    // }else return setDone("no-active")
+  }
+  // console.log(done)
+  // console.log(sumData)
+
+  function removeDoneItem(id) {
+    console.log(sumData)
+    console.log(id)
+    setSumDone(prevData => {
+      return prevData.filter((data, index) => {
+        console.log(index)
+        console.log(id === index)
+        return index !== id;
+      })
+    });
   }
 
-  function clearAll() {
-    return setSumData([])
+  function removeItem(id) {
+    console.log(sumData)
+    console.log(id)
+    setSumData(prevData => {
+      return prevData.filter((data, index) => {
+        console.log(index)
+        console.log(id === index)
+        return index !== id;
+      })
+    });
   }
+
   const changeTitle = e => {
     const { value } = e.target;
     setData(prevState => ({
@@ -103,6 +153,9 @@ function App() {
         clearAll={clearAll}
         addDone={addDone}
         done={done}
+        sumDone={sumDone}
+        removeDoneItem={removeDoneItem}
+        clearAllDone={clearAllDone}
       />
     </div>
   );

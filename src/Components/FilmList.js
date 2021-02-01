@@ -1,6 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import ModalBox from "./Modal";
 import ToDoItem from './TodoItem';
+import DoneItem from './DoneItem';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 
@@ -18,7 +19,10 @@ export default function FilmList(props) {
         handleShow,
         removeItem,
         addDone,
-        done
+        done,
+        sumDone,
+        removeDoneItem,
+        clearAllDone
     } = props;
 
     const all = "Kryminał";
@@ -28,24 +32,25 @@ export default function FilmList(props) {
     // console.log(filters)
 
     const count = sumData.length
+    const count2 = sumDone.length
 
-    if (sumData.length !== 0) {
+    // if (sumData.length !== 0) {
 
-    } else return (
-        <>
-            <ModalBox
-                show={show}
-                handleShow={handleShow}
-                handleClose={handleClose} a={a}
-                clearAll={clearAll} sumData={sumData}
-                changeTitle={changeTitle}
-                changeAutor={changeAutor}
-                changeCat={changeCat}
-                changePri={changePri}
-            />
-            <h4>Brak filmów do obejrzenia, dodaj film do listy</h4>
-        </>
-    )
+    // } else return (
+    //     <>
+    //         <ModalBox
+    //             show={show}
+    //             handleShow={handleShow}
+    //             handleClose={handleClose} a={a}
+    //             clearAll={clearAll} sumData={sumData}
+    //             changeTitle={changeTitle}
+    //             changeAutor={changeAutor}
+    //             changeCat={changeCat}
+    //             changePri={changePri}
+    //         />
+    //         <h4>Brak filmów do obejrzenia, dodaj film do listy</h4>
+    //     </>
+    // )
     return (
         <>
             <ModalBox
@@ -83,10 +88,9 @@ export default function FilmList(props) {
                                 onCheck={removeItem}
                             />
                         ))} */}
-
                         {/* To działa */}
                         {sumData.map((d, index) => {
-                            // console.log(d.category)
+                            // console.log(sumData)
                             return (
                                 <ToDoItem
                                     key={index}
@@ -95,6 +99,7 @@ export default function FilmList(props) {
                                     onCheck={removeItem}
                                     addDone={addDone}
                                     done={done}
+                                    sumData={sumData}
                                 />
                             )
                         })}
@@ -115,6 +120,41 @@ export default function FilmList(props) {
                                 </>
                             )
                         })} */}
+                    </tbody>
+                </Table>
+                <div className="header-container">
+                    <h6>Obejrzane filmy: {count2}</h6>
+                    <Button onClick={clearAllDone} variant="primary" className="btn-rmv">Wyczyść</Button>
+                </div>
+
+
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Tytuł</th>
+                            <th>Autor</th>
+                            <th onClick={filterCategory}>Kategoria</th>
+                            <th>Priorytet</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {sumDone.map((da, index) => {
+                            // console.log(sumData)
+                            return (
+                                <DoneItem
+                                    key={index}
+                                    id={index}
+                                    d={da}
+                                    onCheck={removeItem}
+                                    addDone={addDone}
+                                    done={done}
+                                    sumData={sumData}
+                                    sumDone={sumDone}
+                                    onCheck={removeDoneItem}
+                                />
+                            )
+                        })}
                     </tbody>
                 </Table>
             </div>
