@@ -1,6 +1,7 @@
 import './App.css';
 import FilmList from "./Components/FilmList";
 import { useState } from "react";
+import TodoItem2 from "./Components/TodoItem2";
 
 // const arr = {
 //   title: "film1",
@@ -31,46 +32,63 @@ function App() {
     return
   }
 
-  function addDone(id) {
+  // function addDone(id) {
 
-    // let doneTab2 = [...sumDone, done]
-    // setSumDone(done)
+  //   // let doneTab2 = [...sumDone, done]
+  //   // setSumDone(done)
 
-    setDone(prevData => {
-      return sumData.filter((data, index) => {
-        return index === id;
-      })
+  //   setDone(prevData => {
+  //     return sumData.filter((data, index) => {
+  //       return index === id;
+  //     })
+  //   });
+  //   function addDoneSum() {
+  //     const doneTab = sumDone.concat(sumDone)
+  //     setSumDone(doneTab)
+  //     console.log(sumDone)
+
+
+  //     return
+  //   }
+  //   addDoneSum();
+  //   // const doneTab = sumDone.concat(done)
+  //   // setSumDone(doneTab)
+
+  //   // console.log(doneTab)
+
+  //   // setSumDone(done)
+  //   // console.log(sumDone)
+  //   // console.log(done)
+
+  //   setSumData(prevData => {
+  //     return prevData.filter((data, index) => {
+  //       return index !== id;
+  //     })
+  //   });
+  //   // const a = sumData;
+  //   // if (done === "no-active") {
+  //     //   setDone("active")
+  //     // }else return setDone("no-active")
+  //   }
+  //   // console.log(done)
+  //   // console.log(sumData)
+
+  const addDone = (id) => {
+    setSumDone(sumData)
+    setSumDone((prevItems) => {
+      const tab = [...prevItems];
+      console.log(tab)
+      // const i = tab[0].key
+      console.log(id)
+      const index = tab.findIndex((item) => item.id === item.id);
+      tab[index].isDone = true;
+      // console.log(index)
+      return tab;
     });
-    function addDoneSum() {
-      const doneTab = sumDone.concat(done)
-      setSumDone(doneTab)
-      console.log(doneTab)
-
-
-      return
-    }
-    addDoneSum();
-    // const doneTab = sumDone.concat(done)
-    // setSumDone(doneTab)
-
-    // console.log(doneTab)
-
-    // setSumDone(done)
-    // console.log(sumDone)
-    // console.log(done)
-
-    setSumData(prevData => {
-      return prevData.filter((data, index) => {
-        return index !== id;
-      })
-    });
-    // const a = sumData;
-    // if (done === "no-active") {
-    //   setDone("active")
-    // }else return setDone("no-active")
-  }
-  // console.log(done)
-  // console.log(sumData)
+  };
+  const tasks = sumData.filter((item) => item.isDone === false);
+  const doneTasks = sumDone.filter((item) => item.isDone === true);
+  console.log(doneTasks)
 
   function removeDoneItem(id) {
     setSumDone(prevData => {
@@ -96,34 +114,38 @@ function App() {
     const { value } = e.target;
     setData(prevState => ({
       ...prevState,
-      title: value.trim()
+      title: value.trim(),
+      isDone: false
     }))
   };
   const changeAutor = e => {
     const { value } = e.target;
     setData(prevState => ({
       ...prevState,
-      name: value
+      name: value,
+      isDone: false
     }))
   }
   const changeCat = e => {
     const { value } = e.target;
     setData(prevState => ({
       ...prevState,
-      category: value
+      category: value,
+      isDone: false
     }))
   }
   const changePri = e => {
     const { value } = e.target;
     setData(prevState => ({
       ...prevState,
-      priority: value
+      priority: value,
+      isDone: false
     }))
   }
   return (
     <div className="App">
       <FilmList
-        sumData={sumData}
+        sumData={tasks}
         data={data}
         a={a}
         changeTitle={changeTitle}
@@ -136,11 +158,19 @@ function App() {
         removeItem={removeItem}
         clearAll={clearAll}
         addDone={addDone}
-        done={done}
+        // done={done}
         sumDone={sumDone}
         removeDoneItem={removeDoneItem}
         clearAllDone={clearAllDone}
+        doneTasks={doneTasks}
       />
+      {/* {!item.isDone && <button onClick={() => onDone(item)}>OK</button>} */}
+
+      {/* <ul>
+        {doneTasks.map((item) => {
+          return <TodoItem2 item={item} key={item.id} />;
+        })}
+      </ul> */}
     </div>
   );
 }

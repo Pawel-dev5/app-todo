@@ -22,7 +22,9 @@ export default function FilmList(props) {
         done,
         sumDone,
         removeDoneItem,
-        clearAllDone
+        clearAllDone,
+        doneTasks,
+        item
     } = props;
 
     const all = "Kryminał";
@@ -100,6 +102,7 @@ export default function FilmList(props) {
                                     addDone={addDone}
                                     done={done}
                                     sumData={sumData}
+                                    item={item}
                                 />
                             )
                         })}
@@ -123,7 +126,7 @@ export default function FilmList(props) {
                     </tbody>
                 </Table>
                 <div className="header-container">
-                    <h6>Obejrzane filmy: {count2}</h6>
+                    <h6>Oglądane: {count2}</h6>
                     <Button onClick={clearAllDone} variant="primary" className="btn-rmv">Wyczyść</Button>
                 </div>
 
@@ -146,7 +149,7 @@ export default function FilmList(props) {
                                     key={index}
                                     id={index}
                                     d={da}
-                                    onCheck={removeItem}
+                                    // onCheck={removeItem}
                                     addDone={addDone}
                                     done={done}
                                     sumDone={sumDone}
