@@ -14,7 +14,6 @@ export default function ModalBox(props) {
         add,
         show,
         handleClose,
-        handleShow
     } = props;
     return (
         <>
