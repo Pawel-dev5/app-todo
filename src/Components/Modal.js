@@ -11,28 +11,34 @@ export default function ModalBox(props) {
         ToDoAction,
         data,
         sumData,
-        a,
+        add,
         show,
         handleClose,
         handleShow
     } = props;
     return (
         <>
-            <Button variant="primary" className="btn-add" onClick={handleShow} >
-                Dodaj film do listy
-            </Button>
             <Modal show={show} onHide={handleClose} data={data}>
                 <Modal.Header closeButton>
                     <Modal.Title>Dodaj film</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <AddForm a={a} data={data} sumData={sumData} handleClose={handleClose} ToDoAction={ToDoAction} changeTitle={changeTitle} changeAutor={changeAutor} changeCat={changeCat} changePri={changePri} />
+                    <AddForm
+                        add={add}
+                        data={data}
+                        sumData={sumData}
+                        handleClose={handleClose}
+                        ToDoAction={ToDoAction}
+                        changeTitle={changeTitle}
+                        changeAutor={changeAutor}
+                        changeCat={changeCat}
+                        changePri={changePri} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Zamknij
                     </Button>
-                    <Button variant="primary" onClick={a} >
+                    <Button variant="primary" onClick={add} >
                         Dodaj
                     </Button>
                 </Modal.Footer>
