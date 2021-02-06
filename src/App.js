@@ -1,13 +1,16 @@
 import './App.css';
 import FilmList from "./Components/FilmList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as _ from "lodash";
 
 function App() {
+  // Localstorage
+  const postsData = JSON.parse(localStorage.getItem("sumData"));
+
   // Default modal state
   const defaultShow = false
   const [show, setShow] = useState(defaultShow);
-  const [sumData, setSumData] = useState([]);
+  const [sumData, setSumData] = useState(postsData || []);
   const [sumDataCopy, setSumDataCopy] = useState([]);
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("");
@@ -16,6 +19,16 @@ function App() {
   // console.log(sumDataCopy)
   // console.log(data)
 
+  //use useeffect to save the post in our locastorage with the method setIntem()
+  //The post is save in a JSON.stringifiý format and we wil need to parse it before
+  //use it after collecting it with getItem() method
+  useEffect(() => {
+    localStorage.setItem("sumData", JSON.stringify(sumData));
+  });
+  const a = localStorage.getItem("sumData");
+
+  console.log(a)
+  console.log(sumData)
   // Modal show/close function
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -39,10 +52,10 @@ function App() {
     const sorted = _.sortBy(sumData, sort)
     return setSumData(sorted)
   }
-console.log(filtr)
+// console.log(filtr)
   function filter(value) {
     setSumDataCopy(sumData)
-    const c = "Kryminał"
+    // const c = "Kryminał"
     setSumData(prevData => {
       return prevData.filter((item) => filtr === item.category)
     })
