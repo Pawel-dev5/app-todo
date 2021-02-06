@@ -12,9 +12,9 @@ function App() {
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("");
   const [filtr, setFiltr] = useState("");
-  console.log(sumData)
-  console.log(sumDataCopy)
-  console.log(data)
+  // console.log(sumData)
+  // console.log(sumDataCopy)
+  // console.log(data)
 
   // Modal show/close function
   const handleClose = () => setShow(false);
