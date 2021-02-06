@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import ModalBox from "./Modal";
 import ToDoItem from './TodoItem';
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import * as _ from "lodash";
 
 export default function FilmList(props) {
     const {
@@ -16,14 +16,17 @@ export default function FilmList(props) {
         show,
         handleClose,
         handleShow,
-        removeItem
+        removeItem,
+        setSortValue,
+        sort,
+        sorted
     } = props;
 
-    const all = "Kryminał";
-    const [filters, setFilters] = useState(all);
+    // const all = "Kryminał";
+    // const [filters, setFilters] = useState(all);
 
-    const filterCategory = () => { setFilters("Dramat") }
-    console.log(filters)
+    // const filterCategory = () => { setFilters("Dramat") }
+    // console.log(filters)
 
     const count = sumData.length
 
@@ -61,13 +64,19 @@ export default function FilmList(props) {
                 <div className="header-container">
                     <h6>Filmy do obejrzenia: {count}</h6>
                     <Button onClick={clearAll} variant="primary" className="btn-rmv">Wyczyść</Button>
+                    <select className="select" value={sort} onClick={sorted} onChange={setSortValue}>
+                        <option value="title">Tytuł</option>
+                        <option value="name">Autor</option>
+                        <option value="category">Kategoria</option>
+                        <option value="priority">Priorytet</option>
+                    </select>
                 </div>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>Tytuł</th>
                             <th>Autor</th>
-                            <th onClick={filterCategory}>Kategoria</th>
+                            <th >Kategoria</th>
                             <th>Priorytet</th>
                             <th>Action</th>
                         </tr>
@@ -84,7 +93,6 @@ export default function FilmList(props) {
 
                         {/* To działa */}
                         {sumData.map((d, index) => {
-                            console.log(d.category)
                             return (
                                 <ToDoItem
                                     key={index}

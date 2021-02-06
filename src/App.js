@@ -1,21 +1,38 @@
 import './App.css';
 import FilmList from "./Components/FilmList";
 import { useState } from "react";
+import * as _ from "lodash";
 
 function App() {
   const defaultShow = false
   const [show, setShow] = useState(defaultShow);
   const [sumData, setSumData] = useState([]);
   const [data, setData] = useState([]);
+  const [sort, setSort] = useState("")
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  function sorted() {
+    const sorted = _.sortBy(sumData, sort)
+    return setSumData(sorted)
+  }
+
+  const setSortValue = (e) => {
+    setSort(e.target.value);
+  };
   function a() {
     let tab = [...sumData, data];
     console.log(tab)
     setShow(defaultShow);
     return setSumData(tab);
+  }
+
+  function filter(value) {
+    const c = "Kryminał"
+    setSumData(prevData => {
+      return prevData.filter((item) => value === item.category)
+    })
   }
   function removeItem(id) {
     setSumData(prevData => {
@@ -59,6 +76,9 @@ function App() {
   return (
     <div className="App">
       <FilmList
+        sort={sort}
+        sorted={sorted}
+        setSortValue={setSortValue}
         sumData={sumData}
         data={data}
         a={a}
