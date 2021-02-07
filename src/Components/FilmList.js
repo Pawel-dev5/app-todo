@@ -4,7 +4,9 @@ import ToDoItem from './TodoItem';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPlusCircle, } from '@fortawesome/free-solid-svg-icons';
+import { CSVLink } from "react-csv";
+
 export default function FilmList(props) {
     const {
         changeTitle,
@@ -26,32 +28,21 @@ export default function FilmList(props) {
         setSumData,
         filter,
         setFilterValue,
-        filtr
+        // filtr
     } = props;
-    const count = sumData.length
 
-    // if (sumData.length !== 0) {
-
-    // } else return (
-    //     <>
-    //         <ModalBox
-    //             show={show}
-    //             handleShow={handleShow}
-    //             handleClose={handleClose}
-    //             add={add}
-    //             clearAll={clearAll}
-    //             sumData={sumData}
-    //             changeTitle={changeTitle}
-    //             changeAutor={changeAutor}
-    //             changeCat={changeCat}
-    //             changePri={changePri}
-    //         />
-    //         <h4>Brak filmów do obejrzenia, dodaj film do listy</h4>
-    //     </>
-    // )
+    // Table counter
+    const count = sumData.length;
+    // CSV export headers. To export use https://www.npmjs.com/package/react-csv
+    const headers2 = [
+        { label: "Tytuł", key: "title" },
+        { label: "Autor", key: "name" },
+        { label: "Kategoria", key: "category" },
+        { label: "Priorytet", key: "priority" }
+    ];
 
     function ClearFilter() {
-        if(sumDataCopy.length !== 0){
+        if (sumDataCopy.length !== 0) {
             setSumData(sumDataCopy)
         }
         return
@@ -86,22 +77,6 @@ export default function FilmList(props) {
                             </div>
                         </div>
                         <div className="filter-container">
-                            {/* <p>Sortowanie:</p>
-                        <select className="select" value={sort} onClick={sorted} onChange={setSortValue}>
-                            <option value="title">Tytuł</option>
-                            <option value="name">Autor</option>
-                            <option value="category">Kategoria</option>
-                            <option value="priority">Priorytet</option>
-                        </select>
-                        <p>Filtr kategorii:</p>
-                        <select className="select" value={filtr} onClick={filter} onChange={setFilterValue}>
-                            <option value="Kryminał">Kryminał</option>
-                            <option value="Science-fiction">Science-fiction</option>
-                            <option value="Fantasy">Fantasy</option>
-                            <option value="Poezja">Poezja</option>
-                            <option value="Dramat">Dramat</option>
-                            <option value="Nauki ścisłe">Nauki ścisłe</option>
-                        </select> */}
                             <Form>
                                 <Form.Group controlId="exampleForm.SelectCustom">
                                     <Form.Label>Sortowanie:</Form.Label>
@@ -116,12 +91,12 @@ export default function FilmList(props) {
                             <Form>
                                 <Form.Group controlId="exampleForm.SelectCustom">
                                     <Form.Label>Filtr kategorii:</Form.Label>
-                                    <Form.Control as="select" custom value={filtr} onClick={filter} onChange={setFilterValue}>
-                                        <option value="Kryminał">Kryminał</option>
-                                        <option value="Science-fiction">Science-fiction</option>
+                                    <Form.Control as="select" custom onClick={filter}>
+                                        <option value="Kryminał" onChange={setFilterValue}>Kryminał</option>
+                                        <option value="Science-fiction" onChange={setFilterValue}>Science-fiction</option>
                                         <option value="Fantasy">Fantasy</option>
                                         <option value="Poezja">Poezja</option>
-                                        <option value="Dramat">Dramat</option>
+                                        <option value="Dramat" onChange={setFilterValue}>Dramat</option>
                                         <option value="Nauki ścisłe">Nauki ścisłe</option>
                                     </Form.Control>
                                 </Form.Group>
@@ -164,6 +139,20 @@ export default function FilmList(props) {
                             })}
                         </tbody>
                     </Table>
+                    {sumData.length !== 0 ? (
+                        <>
+                            <CSVLink data={sumData} headers={headers2}>
+                                <Button>
+                                    Pobierz CSV
+                                    <FontAwesomeIcon className="download-icon" icon={faDownload} />
+                                </Button>
+                            </CSVLink>
+                        </>
+                    ) : (
+                            <>
+                                <p>Aby pobrać tabelę dodaj film</p>
+                            </>
+                        )}
                 </div>
             </div>
         </>
