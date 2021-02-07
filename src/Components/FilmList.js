@@ -235,7 +235,7 @@ export default function FilmList(props) {
                                 <th>Autor</th>
                                 <th>Kategoria</th>
                                 <th>Priorytet</th>
-                                <th>Action</th>
+                                <th className="guide">Action</th>
                             </tr>
                         </thead>
                         <tbody>

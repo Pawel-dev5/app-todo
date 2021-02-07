@@ -9,8 +9,8 @@ export default function PageGuide() {
             callback={() => null}
             steps={[
                 {
-                    content: "Przytrzymaj aby przesunąć wiersz",
-                    target: ".fa-arrows-alt-v"
+                    content: "Przytrzymaj, aby przesunąć wiersze tabeli",
+                    target: ".guide"
                 }
             ]}
         />
