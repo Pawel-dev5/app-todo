@@ -9,8 +9,12 @@
   font-family: "Roboto Mono", monospace;
   background-position-x: center;
 }
-.modal-content {
+.modal-content,
+.react-joyride__tooltip {
   font-family: "Roboto Mono", monospace;
+}
+.react-joyride__tooltip > div:nth-child(2) > button {
+  background-color: #0069d9 !important;
 }
 .App-logo {
   height: 40vmin;

@@ -2,6 +2,7 @@ import './App.css';
 import FilmList from "./Components/FilmList";
 import { useState, useEffect } from "react";
 import * as _ from "lodash";
+import PageGuide from "./Components/PageGuide";
 
 function App() {
   // Localstorage
@@ -106,6 +107,7 @@ function App() {
   }
   return (
     <div className="App">
+      <PageGuide />
       <FilmList
         sort={sort}
         sorted={sorted}
