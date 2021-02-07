@@ -12,6 +12,7 @@ export default function FilmList(props) {
         changeCat,
         changePri,
         sumData,
+        setData,
         add,
         clearAll,
         show,
@@ -48,6 +49,13 @@ export default function FilmList(props) {
     //         <h4>Brak filmów do obejrzenia, dodaj film do listy</h4>
     //     </>
     // )
+
+    function ClearFilter() {
+        if(sumDataCopy.length !== 0){
+            setSumData(sumDataCopy)
+        }
+        return
+    }
     return (
         <>
             <ModalBox
@@ -74,7 +82,7 @@ export default function FilmList(props) {
                             <h6>Filmy do obejrzenia: {count}</h6>
                             <div>
                                 <Button onClick={clearAll} variant="primary" className="btn-rmv">Wyczyść listę</Button>
-                                <Button onClick={() => setSumData(sumDataCopy)}>Wyczyść filtr</Button>
+                                <Button onClick={ClearFilter}>Wyczyść filtr</Button>
                             </div>
                         </div>
                         <div className="filter-container">
@@ -138,6 +146,19 @@ export default function FilmList(props) {
                                         id={index}
                                         d={d}
                                         onCheck={removeItem}
+                                        setData={setData}
+                                        handleShow={handleShow}
+                                        handleClose={handleClose}
+                                        show={show}
+                                        add={add}
+                                        data={d}
+                                        clearAll={clearAll}
+                                        sumData={sumData}
+                                        changeTitle={changeTitle}
+                                        changeAutor={changeAutor}
+                                        changeCat={changeCat}
+                                        changePri={changePri}
+                                        setSumData={setSumData}
                                     />
                                 )
                             })}
