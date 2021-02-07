@@ -6,10 +6,11 @@
   background-image: url("../src/assets/tv.jpg");
   background-size: cover;
   min-height: 1000px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
+  background-position-x: center;
 }
 .modal-content {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 .App-logo {
   height: 40vmin;
@@ -93,20 +94,29 @@
   font-size: 12px;
   margin-right: 5px;
 }
-
 .table {
   background-color: white;
-  overflow: scroll;
-  display: flow-root;
-  flex-direction: column;
 }
-.icon-edit{
+@media (max-width: 560px) {
+  .table {
+    overflow: scroll;
+    display: flow-root;
+    flex-direction: column;
+  }
+}
+.icon-edit {
   margin-right: 10px;
-  color: #0069D9;
+  color: #0069d9;
 }
-.download-icon{
+.download-icon {
   margin-left: 10px;
 }
-.pdf-button{
+.pdf-button {
   margin-left: 10px;
+}
+.fa-lg {
+  margin-right: 10px;
+}
+tbody > tr:nth-child(1) > td:nth-child(5) {
+  min-width: 90px;
 }

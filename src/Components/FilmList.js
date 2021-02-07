@@ -8,6 +8,7 @@ import { faFileCsv, faFilePdf, faPlusCircle, } from '@fortawesome/free-solid-svg
 import { CSVLink } from "react-csv";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import { useState } from "react";
 
 export default function FilmList(props) {
     const {
@@ -78,6 +79,100 @@ export default function FilmList(props) {
         }
         return
     }
+
+    // Drop & Drag
+    // It doesn't work on mobile devices, so an implementation with mouse events would need to be done.
+    const initialDnDState = {
+        draggedFrom: null,
+        draggedTo: null,
+        isDragging: false,
+        originalOrder: [],
+        updatedOrder: []
+    }
+    const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
+
+    // onDragStart fires when an element
+    // starts being dragged
+    const onDragStart = (event) => {
+        const initialPosition = Number(event.currentTarget.dataset.position);
+        setDragAndDrop({
+            ...dragAndDrop,
+            draggedFrom: initialPosition,
+            isDragging: true,
+            originalOrder: sumData
+        });
+
+        // Note: this is only for Firefox.
+        // Without it, the DnD won't work.
+        // But we are not using it.
+        event.dataTransfer.setData("text/html", '');
+    }
+
+    // onDragOver fires when an element being dragged
+    // enters a droppable area.
+    // In this case, any of the items on the list
+    const onDragOver = (event) => {
+
+        // in order for the onDrop
+        // event to fire, we have
+        // to cancel out this one
+        event.preventDefault();
+
+        let newList = dragAndDrop.originalOrder;
+
+        // index of the item being dragged
+        const draggedFrom = dragAndDrop.draggedFrom;
+
+        // index of the droppable area being hovered
+        const draggedTo = Number(event.currentTarget.dataset.position);
+
+        const itemDragged = newList[draggedFrom];
+        const remainingItems = newList.filter((item, index) => index !== draggedFrom);
+
+        newList = [
+            ...remainingItems.slice(0, draggedTo),
+            itemDragged,
+            ...remainingItems.slice(draggedTo)
+        ];
+
+        if (draggedTo !== dragAndDrop.draggedTo) {
+            setDragAndDrop({
+                ...dragAndDrop,
+                updatedOrder: newList,
+                draggedTo: draggedTo
+            })
+        }
+
+    }
+
+    const onDrop = (event) => {
+
+        setSumData(dragAndDrop.updatedOrder);
+
+        setDragAndDrop({
+            ...dragAndDrop,
+            draggedFrom: null,
+            draggedTo: null,
+            isDragging: false
+        });
+    }
+
+    function onDragLeave() {
+        setDragAndDrop({
+            ...dragAndDrop,
+            draggedTo: null
+        });
+
+    }
+    // Not needed, just for logging purposes:
+    // useEffect(() => {
+    //     console.log("Dragged From: ", dragAndDrop && dragAndDrop.draggedFrom);
+    //     console.log("Dropping Into: ", dragAndDrop && dragAndDrop.draggedTo);
+    // }, [dragAndDrop])
+
+    // useEffect(() => {
+    //     console.log("List updated!");
+    // }, [sumData])
     return (
         <>
             <ModalBox
@@ -94,7 +189,6 @@ export default function FilmList(props) {
             />
             <div className="container-list">
                 <div>
-
                     <div className="header-container">
                         <Button variant="primary" onClick={handleShow} >
                             Dodaj film
@@ -150,6 +244,7 @@ export default function FilmList(props) {
                                     <ToDoItem
                                         key={index}
                                         id={index}
+                                        index={index}
                                         d={d}
                                         onCheck={removeItem}
                                         setData={setData}
@@ -165,6 +260,11 @@ export default function FilmList(props) {
                                         changeCat={changeCat}
                                         changePri={changePri}
                                         setSumData={setSumData}
+                                        onDragStart={onDragStart}
+                                        onDragOver={onDragOver}
+                                        onDrop={onDrop}
+                                        dragAndDrop={dragAndDrop}
+                                        onDragLeave={onDragLeave}
                                     />
                                 )
                             })}
