@@ -4,8 +4,10 @@ import ToDoItem from './TodoItem';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faPlusCircle, } from '@fortawesome/free-solid-svg-icons';
+import { faFileCsv, faFilePdf, faPlusCircle, } from '@fortawesome/free-solid-svg-icons';
 import { CSVLink } from "react-csv";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 export default function FilmList(props) {
     const {
@@ -31,6 +33,7 @@ export default function FilmList(props) {
         // filtr
     } = props;
 
+    const data = [sumData]
     // Table counter
     const count = sumData.length;
     // CSV export headers. To export use https://www.npmjs.com/package/react-csv
@@ -40,7 +43,33 @@ export default function FilmList(props) {
         { label: "Kategoria", key: "category" },
         { label: "Priorytet", key: "priority" }
     ];
+    // PDF exports, use https://www.npmjs.com/package/jspdf and https://www.npmjs.com/package/jspdf-autotable
+    function exportPDF() {
+        const unit = "pt";
+        const size = "A4"; // Use A1, A2, A3 or A4
+        const orientation = "portrait"; // portrait or landscape
 
+        const marginLeft = 40;
+        const doc = new jsPDF(orientation, unit, size);
+
+        doc.setFontSize(15);
+
+        const title = "Lista filmów do obejrzenia";
+        const headers = [["Tytul", "Autor", "Kategoria", "Priorytet"]];
+
+        const data = sumData.map(elt => [elt.title, elt.name, elt.category, elt.priority]);
+
+        let content = {
+            startY: 50,
+            head: headers,
+            body: data
+        };
+
+        doc.text(title, marginLeft, 40);
+        doc.autoTable(content);
+        doc.save("Lista filmów.pdf")
+    }
+    // Function clear category filter
     function ClearFilter() {
         if (sumDataCopy.length !== 0) {
             setSumData(sumDataCopy)
@@ -141,12 +170,16 @@ export default function FilmList(props) {
                     </Table>
                     {sumData.length !== 0 ? (
                         <>
-                            <CSVLink data={sumData} headers={headers2}>
+                            <CSVLink data={data[0]} headers={headers2} filename={"Lista filmów.csv"} separator={';'}>
                                 <Button>
                                     Pobierz CSV
-                                    <FontAwesomeIcon className="download-icon" icon={faDownload} />
+                                    <FontAwesomeIcon className="download-icon" icon={faFileCsv} />
                                 </Button>
                             </CSVLink>
+                            <Button className="pdf-button" onClick={() => exportPDF()}>
+                                Generuj PDF
+                                <FontAwesomeIcon className="download-icon" icon={faFilePdf} />
+                            </Button>
                         </>
                     ) : (
                             <>
