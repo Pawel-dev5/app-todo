@@ -170,12 +170,12 @@ export default function FilmList(props) {
                     </Table>
                     {sumData.length !== 0 ? (
                         <>
-                            <CSVLink data={data[0]} headers={headers2} filename={"Lista filmów.csv"} separator={';'}>
+                            {/* <CSVLink data={data[0]} headers={headers2} filename={"Lista filmów.csv"} separator={';'}>
                                 <Button>
                                     Pobierz CSV
                                     <FontAwesomeIcon className="download-icon" icon={faFileCsv} />
                                 </Button>
-                            </CSVLink>
+                            </CSVLink> */}
                             <Button className="pdf-button" onClick={() => exportPDF()}>
                                 Generuj PDF
                                 <FontAwesomeIcon className="download-icon" icon={faFilePdf} />
