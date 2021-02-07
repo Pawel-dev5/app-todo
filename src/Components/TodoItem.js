@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
-import ModalBox from "./Modal";
 import Modal from 'react-bootstrap/Modal';
-import AddForm from "./AddForm";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -31,12 +29,12 @@ export default function ToDoItem(props) {
     const [editedData, setEditedData] = useState({});
     // console.log(d)
     function showw() {
-        console.log(editData)
+        // console.log(editData)
         handleShow()
         return setEditData(d)
 
     }
-    console.log(editedData)
+    // console.log(editedData)
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

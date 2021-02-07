@@ -16,9 +16,10 @@ function App() {
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("");
   const [filtr, setFiltr] = useState("");
-  console.log(sumData)
+  // console.log(sumData)
   // console.log(sumDataCopy)
-  console.log(data)
+  // console.log(data)
+
   // Modal show/close function
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -37,21 +38,30 @@ function App() {
     setSort(e.target.value);
   };
   // Get value form select to compare in filtred function
+  // const setFilterValue = (e) => {
+  //   setFiltr(e.target.value);
+  //   console.log(filtr)
+  // };
   const setFilterValue = (e) => {
-    setFiltr(e.target.value);
+    const { value } = e.target;
+    setFiltr(value)
   };
+  // console.log(filtr)
+  
   // Sort table by select
   function sorted() {
     const sorted = _.sortBy(sumData, sort)
     return setSumData(sorted)
   }
-// console.log(filtr)
+  // console.log(filtr)
   function filter() {
     setSumDataCopy(sumData)
     // const c = "Kryminał"
-    setSumData(prevData => {
-      return prevData.filter((item) => filtr === item.category)
-    })
+    const tasks = sumData.filter((item) => item.category === filtr);
+    return setSumData(tasks)
+    // setSumData(prevData => {
+    //   return prevData.filter((item) => filtr === item.category)
+    // })
   }
   // Delete item from table
   function removeItem(id) {
@@ -61,7 +71,7 @@ function App() {
       })
     });
   }
-// Delete all by clear state
+  // Delete all by clear state
   function clearAll() {
     return setSumData([])
   }
