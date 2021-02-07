@@ -47,7 +47,7 @@ function App() {
     setFiltr(value)
   };
   // console.log(filtr)
-  
+
   // Sort table by select
   function sorted() {
     const sorted = _.sortBy(sumData, sort)
