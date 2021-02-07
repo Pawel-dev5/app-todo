@@ -53,6 +53,8 @@ export default function FilmList(props) {
         const doc = new jsPDF(orientation, unit, size);
 
         doc.setFontSize(15);
+        doc.setLanguage("pl-Pl")
+
 
         const title = "Lista filmów do obejrzenia";
         const headers = [["Tytul", "Autor", "Kategoria", "Priorytet"]];
