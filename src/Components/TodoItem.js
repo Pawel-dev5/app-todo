@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,18 +10,12 @@ export default function ToDoItem(props) {
         d,
         id,
         onCheck,
-        // setData,
-        // show,
-        // handleShow,
-        // handleClose,
-        // add,
-        // data,
-        // clearAll,
-        // sumData,
-        // changeTitle,
-        // changeAutor,
-        // changeCat,
-        // changePri
+        onDragStart,
+        onDragOver,
+        onDrop,
+        dragAndDrop,
+        index,
+        onDragLeave
     } = props;
     const defaultShow = false;
     const [show, setShow] = useState(defaultShow);
@@ -29,7 +23,7 @@ export default function ToDoItem(props) {
     const [editedData, setEditedData] = useState({});
     // console.log(d)
     function showw() {
-        // console.log(editData)
+        console.log(editedData)
         handleShow()
         return setEditData(d)
 
@@ -123,6 +117,26 @@ export default function ToDoItem(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <tr
+                key={index}
+                data-position={index}
+                draggable
+                onDragStart={onDragStart}
+                onDragOver={onDragOver}
+                onDrop={onDrop}
+                onDragLeave={onDragLeave}
+                className={dragAndDrop && dragAndDrop.draggedTo === Number(index) ? "dropArea" : ""}
+            >
+                <td>{d.title}</td>
+                <td>{d.name}</td>
+                <td>{d.category}</td>
+                <td>{d.priority}</td>
+                <td>
+                    <FontAwesomeIcon className="fa-lg" icon={faArrowsAltV} />
+                    <FontAwesomeIcon className="icon-edit" onClick={showw} icon={faEdit} />
+                    <FontAwesomeIcon className="icon-delete" onClick={() => { onCheck(id) }} icon={faTrash} />
+                </td>
+            </tr>
             {/* {editedData ? (
                 <>
                     <tr>
@@ -150,16 +164,6 @@ export default function ToDoItem(props) {
                         </tr>
                     </>
                 )} */}
-                     <tr>
-                            <td>{d.title}</td>
-                            <td>{d.name}</td>
-                            <td>{d.category}</td>
-                            <td>{d.priority}</td>
-                            <td>
-                                <FontAwesomeIcon className="icon-edit" onClick={showw} icon={faEdit} />
-                                <FontAwesomeIcon className="icon-delete" onClick={() => { onCheck(id) }} icon={faTrash} />
-                            </td>
-                        </tr>
         </>
     )
 };
